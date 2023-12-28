@@ -1,0 +1,298 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="extracted-inline-style-0">
+    <style nonce="{{ request.csp_nonce }}">
+    .btn_guinda {
+        background-color: #691c32 !important;
+        border-color: #691c32 !important;
+        font-size: 15px;
+        color: white !important;
+    }
+
+    .btn_limpiar {
+        border-color: #10312b !important;
+        font-size: 15px;
+        background-color: #10312b !important;
+        color: #ffffff !important;
+    }
+
+    .redColor {
+        color: #691C32 !important;
+    }
+
+    .logo_style {
+        width: 100%;
+        height: 100%;
+    }
+
+    .text_color {
+        color: #691C32;
+        font-family: "Montserrat";
+    }
+
+    .text_logo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .no_display {
+        display: none;
+    }
+
+    .guia {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .plus {
+        width: 25px;
+        height: 25px;
+        color: white;
+        border: none;
+        border-radius: 0.35rem;
+        margin-left: 5px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .catalogos_cards:hover{
+        color:#691c32
+    }
+
+    .form-check-input[type=checkbox]{
+        border-radius: 0.25em;
+    }
+
+    .form-check-input{
+        width: 1em;
+        height: 1em;
+        margin-top: 0.25em;
+        vertical-align: top;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: 1px solid rgba(0,0,.25);
+        appearance: none;
+    }
+
+    .form-check-input:checked{
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+
+    .form-check-input:checked[type=checkbox]{
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e")
+    }
+    </style>
+    <style nonce="{{ request.csp_nonce }}">
+    .was-validated .form-control:valid, .form-control.is-valid{
+        border-color: #198754 !important;
+    }
+    </style>
+    <style nonce="{{ request.csp_nonce }}">
+    .extracted-inline-style-0 { height: 100%; }
+.extracted-inline-style-1 { height: 100%; }
+.extracted-inline-style-2 { height: 100%; }
+.extracted-inline-style-3 { margin-top:10px; margin-left:7px }
+.extracted-inline-style-4 { background-color:#691C32 }
+.extracted-inline-style-5 { background-color: #f6f6f6; }
+.extracted-inline-style-6 { background:#10312B }
+.extracted-inline-style-7 { flex: 33%; margin-right: 8px }
+.extracted-inline-style-8 { max-height: 66px;display: block;margin-right: auto; }
+.extracted-inline-style-9 { flex: 33% }
+.extracted-inline-style-10 { max-height: 66px;display: block;margin-left: auto;margin-right: auto; }
+.extracted-inline-style-11 { flex: 33% }
+.extracted-inline-style-12 { max-height: 66px;display: block;margin-left: auto; }
+.extracted-inline-style-13 { background-color: #C9A977; }
+.extracted-inline-style-14 { color: white; }
+
+    </style>
+    <head>
+        <script crossorigin="anonymous"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+                src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script crossorigin="anonymous"
+                integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+                src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <meta charset="utf-8" />
+        <!-- <meta name="viewport"
+       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"> -->
+        <!-- Favicon and title -->
+        <link href="/static/assets/img/logoheader.svg"
+              rel="icon"
+              type="image/x-icon" />
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat"
+              rel="stylesheet" />
+        <link href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}"
+              rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+              rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+              rel="stylesheet" />
+        <link href="{% static 'assets/fonts/fontawesome5-overrides.min.css' %}"
+              rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
+              rel="stylesheet" />
+        <link href="{% static 'assets/css/styles.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+        <link href="{% static 'assets/css/common.css' %}"
+              rel="stylesheet"
+              type="text/css" />
+        {% block css %}{% endblock %}
+    </head>
+    <body class="extracted-inline-style-1" id="page-top">
+        <!-- HTML goes inside this -->
+        <div class="extracted-inline-style-2" id="wrapper">
+            <!-- NAV BAR LEFT -->
+            {% block navbar %}{% endblock %}
+            {% if user.is_authenticated %}
+                <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0">
+                    <div class="container-fluid d-flex flex-column p-0">
+                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand mt-3 mb-4 p-4"
+                           href="">
+                            <div class="sidebar-brand-icon">
+                                <div class="row">
+                                    <div class="extracted-inline-style-3">
+                                        <img class="img-fluid" src="{% static 'assets/img/logo_centrado.png' %}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <hr class="sidebar-divider my-0" />
+                        <!-- Sidebar Options -->
+                        <!-- Sidebar Options -->
+                <ul class="navbar-nav" id="accordionSidebar">
+
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == "/excedente_franquicia/index" %}active {% endif %}" href="{% url 'excedente_franquicia:index' %}">
+                            <i class="fas fa-search redColor"></i>
+                            <span class="redColor" >Excedente de franquicia</span>
+                        </a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == "/"  or request.path == "/excedente_franquicia/registrar"%}active {% endif %}" href="{% url 'excedente_franquicia:registrar' %}">
+                            <i class="fas fa-search redColor"></i>
+                            <span class="redColor" >Registrar excedente de franquicia</span>
+                        </a>
+                    </li> 
+
+                </ul>
+
+
+                <div class="text-center d-none d-md-inline">
+                    <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"
+                        style="background-color:#691C32"></button>
+                </div>
+                    </div>
+                </nav>
+            {% endif %}
+            <!-- END NAV BAR LEFT -->
+            <!-- Right Content -->
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div class="extracted-inline-style-5" id="content">
+                    <!-- NAV BAR TOP -->
+                    {% comment %} {% include "top-navbar.html" %} {% endcomment %}
+                    <nav class="navbar navbar-light navbar-expand shadow mb-4 topbar static-top extracted-inline-style-6">
+                        <div class="container-fluid">
+                            <button class="btn btn-link d-md-none rounded-circle me-3"
+                                    id="sidebarToggleTop"
+                                    type="button">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="extracted-inline-style-7">
+                                <img class="navbar-brand extracted-inline-style-8"
+                                     src="{% static 'assets/img/logoheader.png' %}">
+                            </img>
+                        </div>
+                        <div class="extracted-inline-style-9">
+                            <img class="navbar-brand extracted-inline-style-10"
+                                 src="{% static 'assets/img/logo_horizontal.png' %}" />
+                        </div>
+                        <div class="extracted-inline-style-11">
+                            <img class="img-fluid extracted-inline-style-12"
+                                 src="{% static 'assets/img/Logohacienda.png' %}" />
+                        </div>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow">
+                                    <a aria-expanded="false"
+                                       class="dropdown-toggle nav-link"
+                                       data-bs-toggle="dropdown"
+                                       href="#">
+                                        <span class="d-none d-lg-inline me-2 text-white fw-bold small">{{ request.user.username }}</span>
+                                        <img class="border rounded-circle img-profile"
+                                             src="{% if user.image.url is not None %} {{ request.user.image.url }} {% else %} /media/profiles/generic/default_profile.jpeg{% endif %}" />
+                                    </a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item"
+                                            href="{% if user.id is not None %}{% url 'profile' %}{%endif%}">
+                                            <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
+                                            &nbsp;Perfil
+                                        </a>
+                                        {% endif %}
+
+                                        {% comment %} <a class="dropdown-item" href="#">
+                                            <i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>
+                                            &nbsp;Settings
+                                        </a> {% endcomment %}
+
+                                        {% comment %} {% if request.user.is_superuser %}
+
+                                        <a class="dropdown-item" href="{% url 'history:index' %}">
+                                            <i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>
+                                            &nbsp;Activity log
+                                        </a>
+                                        {% endif %} {% endcomment %}
+                                        <div class="dropdown-divider"></div>
+
+                                        {% if request.user.is_authenticated %}
+                                        <a class="dropdown-item" href="{% url 'logout' %}">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
+                                            &nbsp;Cerrar sesión
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- END NAV BAR TOP -->
+                <!-- Content Section -->
+                <div class="container-fluid">
+                    {% block content %}{% endblock %}
+                </div>
+                <!-- End of content Section -->
+            </div>
+            <!-- FOOTER -->
+            <footer class="sticky-footer extracted-inline-style-13">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright extracted-inline-style-14">
+                        <span>Copyright © ANAM {% now "Y" %}</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- END FOOTER -->
+        </div>
+        <a class="border rounded d-inline scroll-to-top" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+    <!-- Nav bar fuctions -->
+    <!-- modal sustituto de sweetalert2 -->
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

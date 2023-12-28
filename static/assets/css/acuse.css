@@ -1,0 +1,248 @@
+body {
+    font-family: montserrat !important;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    padding: 50px;
+    background-color: white;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+    margin-bottom: 50px;
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__container > * {
+    width: 30%;
+}
+
+.header__container > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    justify-content: center;
+}
+
+.header__container p {
+    margin: 0px;
+}
+
+.title__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title__container h1 {
+    color: #b11c30;
+    font-weight: 900;
+}
+
+.title__container h4 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+input {
+    border: 1px solid #d6a400;
+}
+
+input:focus {
+    border-top: none;
+    outline: 2px solid #d6a400;
+}
+
+h4 {
+    margin-bottom: 5px;
+    font-weight: bold !important;
+}
+
+input[type="radio"] {
+    width: 15px;
+    height: 15px;
+    /* margin-left: 5px; */
+}
+
+input[type="text"] {
+    height: 17px;
+    width: 100%;
+    border-top: none;
+}
+
+/* input[value='si'] {
+    margin-right: 30px;
+} */
+
+.section__header {
+    background-color: #fff9ef;
+    border: 2px solid #e0dcd6;
+    margin-bottom: 15px;
+}
+
+.section__number {
+    width: 35px;
+    height: 35px;
+    background-color: #3c9700;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.section__acuerdo {
+    background-color: #3c9700;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.col label {
+    padding-bottom: 5px;
+}
+
+.blackinput input[type="text"] {
+    outline: none;
+    border-width: 0 0 1px;
+    border-color: black;
+    width: 70px;
+}
+
+.section__6 p {
+    margin: 10px;
+}
+
+.section__6 label {
+    margin: 10px;
+}
+
+.firma {
+    background-color: white;
+    border: 2px solid grey;
+    height: 120px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.sino__radios {
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sino__radios input {
+    /* margin-bottom: 5px; */
+}
+
+.sino__radios label {
+    font-weight: bold;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+label input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.validacion p{
+    font-size: 12px;
+}
+
+hr {
+    width: 100%;
+    border-color: #d6a400;
+}
+
+.input__margin {
+    margin-right: 5px;
+}
+
+
+    @page {
+        margin: 0;
+    }
+
+    body {
+        margin: 0px;
+    }
+
+    .container * {
+        -webkit-print-color-adjust: exact;
+    }
+
+    .container {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    p {
+        font-size: 0.8rem;
+
+    }
+
+    label {
+        margin: 0px !important;
+        margin-bottom: 0px !important;
+        font-size: 0.8rem;
+        padding: 0px !important;
+    }
+
+    .header {
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .section__header {
+        margin-bottom: 8px;
+        border: 1px solid #e0dcd6;
+    }
+
+    .section__number {
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+    }
+
+    input {
+        border: 1px solid #d6a400;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    .section__acuerdo {
+        background-color: #3c9700;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        font-weight: 800;
+    }

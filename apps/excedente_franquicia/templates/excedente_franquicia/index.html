@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+
+{% block title %}Excedente de franquicia{% endblock %}
+{% block css %}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+{% endblock %}
+
+{% block content %}
+
+
+<!-- Content Section -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-6">
+            <h3 class="mb-4 text_color"><strong>Excedente de franquicia</strong><br /></h3>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 text-end" style="margin-bottom: 30px;">
+            <a class="btn btn-danger" role="button" href="{% url 'excedente_franquicia:registrar' %}"
+                style="background-color: #691C32; border-radius: 20px; border: none;">
+                <i class="fa fa-plus"></i> Registrar viaje
+            </a>
+        </div>
+    </div>
+    
+    <div id="TableSorterCard" class="card">
+        <div class="card-header py-3">
+            <div class="row table-topper align-items-center">
+                <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;">
+                    <p class=" m-0 fw-bold text_color">Lista de viajes</p>
+                </div>
+
+                <form class="search-form w-100" method="get" id="avc_filters">
+                    <div class="row bg-white pt-3">
+                        <div class="col-md-12" style="text-align: left;">
+                            <div class="row align-items-end">
+                                {% for filter_name in filter.form %}
+                                        <div class="col-sm-4 col-md-4" id="{{filter_name.name}}_div" {% if 'fecha_fin' in filter_name.name %}style="display:none"{% endif %}>
+                                            <label class="form-label" style="font-weight: bold;" for="{{ form.zone_name.id_for_label }}">{{ filter_name.label_tag }}</label>
+                                            <div class="d-flex">
+                                                {{ filter_name }}
+                                            </div>
+                                        </div>
+                                {% endfor %}
+
+                                <div class="text-end" style="margin: 0px;padding: 5px 15px;">
+                                    <button class="btn dark btn-sm reset" type="submit"
+                                        style="border-radius: 20px;margin: 2px;color: rgb(255,255,255);border: #C9A977; background-color: #C9A977;border-width: 0px;">Filtrar</button>
+
+
+                                    <a href="{{request.path}}" class="btn btn-sm reset" type="button"
+                                        style="margin: 2px;background: #691c32;color: rgb(255,255,255);border-radius: 20px;border-width: 0px;">Borrar
+                                        filtros</a>
+
+
+                                    <a href="{% url 'excedente_franquicia:csv' %}?{{request.GET.urlencode }}" id="generar_reporte_btn"
+                                        class="btn btn-sm reset" type="button"
+                                        style="margin: 2px;background:#10312B;border-radius: 20px;border-width: 0px;color:white">Reporte
+                                        de EF</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div> 
+
+      
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="table-responsive shadow" style="border-radius: 20px;border-style: none;">
+                <table id="ipi-table" class="table table-striped table-borderless table tablesorter">
+                    <thead class="thead-dark" style="background:#10312B">
+                        <tr>
+                            <th class="text-center">Folio</th>
+                            <th class="text-center">Nombre del jefe de familia</th>
+                            <th class="text-center">Apellido del jefe de familia</th>
+                            <th class="text-center">Fecha de arribo</th>
+                            <th class="text-center">Medio de transporte</th>
+                            <th class="text-center">Aduana de ingreso</th>
+                            <th class="text-center">Punto de revisión</th>
+                            <th class="text-center filter-false sorter-false">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {% for viaje in viajes %}
+                            <tr>
+                                <td>{{viaje.folio}}</td>
+                                <td>{{viaje.nombre_jefe_fa}}</td>
+                                <td>{{viaje.apellido_jefe_fa}}</td>
+                                <td>{{viaje.fecha_fin}}</td>
+                                <td>{{viaje.medio_transporte}}</td>
+                                <td>{{viaje.aduana_ingreso}}</td>
+                                <td>{{viaje.punto_revision}}</td>
+                                <td class="text-center align-middle" style="max-height: 60px;height: 60px;">
+                                    <div class="d-flex">
+                                        {% comment %}  
+                                        <a class="btn btnMaterial btn-flat success semicircle" role="button"
+                                            href="{% url 'excedente_franquicia:mostrar' viaje.id%}">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        {% endcomment %}
+    
+                                        
+                                        <a class="btn btnMaterial btn-flat primary semicircle" role="button"
+                                            href="{% url 'excedente_franquicia:mostrar' viaje.id %}">
+                                            <i class="far fa-eye"></i>
+                                        </a>
+                                        
+                                        {% comment %}  
+                                        <a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button"
+                                            style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                            href="#" onclick="destroy({{viaje.id}})">
+                                            <i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i>
+                                        </a>
+                                        {% endcomment %}
+                                    
+                                    </div>
+    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of content Section -->
+
+<div class="container" style="margin-top: 25px;">
+    <nav class="d-lg-flex justify-content-lg-center">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&lsaquo;</span>
+                </a>
+            </li>
+            {% endif %}
+
+            <li class="page-item">
+                <a class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</a>
+            </li>
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&rsaquo;</span>
+                </a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Previous">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>  
+
+<!-- Pagination -->
+
+<form id="deleteForm" method="post">
+    {% csrf_token %}
+    <div class="modal fade" role="dialog" tabindex="-1" id="delete-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="font-size: 20px;">Eliminar empresa</h4>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p style="font-size: 18px;color: rgb(58,59,69);">
+                        Si eliminas este elemento ya no podrás recuperarlo.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancelar</button>
+
+                    <button class="btn btn-danger" type="button" onclick="">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{% endblock content %}
+
+{% block js %}
+{% comment %}
+<script>
+    function destroy(id) {
+        let url = "{% url 'excedente_franquicia:eliminar' 1 %}";
+        url = url.replace('1', id);
+        $("#deleteForm").attr('action', url);
+    }
+    function formSubmit() {
+        $("#deleteForm").submit();
+    }
+</script>
+{% endcomment %}
+<!-- Delete Script -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+
+    let tipoFiltroInput = document.getElementById('id_tipo_filtro');
+    const options = {
+        "DIA": [
+            'fecha_fin__exact_div',
+        ],
+        "MES": [
+            'fecha_fin__year_div',
+            'fecha_fin__month_div',
+        ],
+        "SEMANA": [
+            'fecha_fin__range_div'
+        ]
+    }
+
+    const defaultOptions = [
+        'fecha_fin__exact_div',
+        'fecha_fin__year_div',
+        'fecha_fin__month_div',
+        'fecha_fin__range_div'
+    ]
+    
+    tipoFiltroInput.addEventListener('change', changeInputs);
+    
+    changeInputs();
+
+    function changeInputs(){
+        let tipo_filtro = id_tipo_filtro.value;
+
+        let inputsToDisplay = options[tipo_filtro] || [];
+
+        inputsToDisplay.map(input => document.getElementById(input).style.display = 'block')
+
+        let inputsToHide = defaultOptions.filter(input => !inputsToDisplay.includes(input));
+        inputsToHide.map(input => clearInput(input))
+    }
+
+    function clearInput(inputName){
+        let input = $(`#${inputName} input`);
+        input.val('');
+        let select = $(`#${inputName} select`);
+        select.val('');
+        let inputDiv = $(`#${inputName}`);
+        inputDiv.hide();
+    }
+
+    document.getElementById('id_fecha_fin__range_0').addEventListener('change', function(){
+        let fechaFin = document.getElementById('id_fecha_fin__range_1');
+        fechaFin.min = this.value;
+        // set max date to 7 days after selected date
+        let date = new Date(this.value);
+        date.setDate(date.getDate() + 7);
+        let max = date.toISOString().split('T')[0]
+        fechaFin.max = max;
+        fechaFin.value = max;
+    })
+
+</script>
+
+
+{% endblock %}

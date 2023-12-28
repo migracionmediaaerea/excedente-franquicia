@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,800" rel="stylesheet">
+    <link rel="stylesheet" href="{{static}}/assets/pdfbootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="{{static}}/assets/bootstrap/css/bootstrap.min.css"> -->
+    <!-- uncomment for testing -->
+    <!-- <link href="https://cdn.discordapp.com/attachments/725985517862387773/1054639632630943784/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{static}}/assets/css/acuses.css">
+</head>
+<body>
+    <!-- Start: 1 Row 3 Columns -->
+    <div class="container mt-4">
+        <div class="row d-table-row">
+            <div class="col w-25 d-table-cell">
+                <img class="img-fluid" src="{{logo_hacienda}}">
+            </div>
+
+            <div class="col w-25 d-table-cell">
+                <img class="img-fluid" src="{{logo_anam}}">
+            </div>
+
+            <div class="col w-25 d-table-cell">
+                <div class="d-flex flex-column mt-0" align="right">
+
+                    <div class="top-text-bold">
+                        Agencia Nacional de Aduanas de México
+                    </div>
+
+                    <div class="top-text">
+                        Aduana: {{viaje.aduana_ingreso}}
+                    </div>
+
+                    <div class="top-text">
+                        {{dia}} de {{mes}} del {{year}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

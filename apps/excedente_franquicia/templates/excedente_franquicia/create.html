@@ -1,0 +1,484 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block title %}Excedente de franquicia{% endblock %}
+{% block css %}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<!-- Content Section -->
+<section class="clean-block clean-form" style="overflow-x: auto; ">
+
+    <div class="container px-0">
+        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <div class="col-md-12" style="margin-bottom: 25px;padding-left: 5%;font-size: 21px;margin-top: 26px;">
+                <a class="anone" href="{{ lineas_externo }}">
+                    <i class="fa fa-long-arrow-left" style="color: #6F7271"></i>
+                    <span style="color: #6F7271">&nbsp; Volver</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="block-heading" style="padding-top: 0px;">
+            <h2 class="text_color" style="font-size: 2.2rem; font-weight: 900;">
+                Excedente de franquicia
+                <br>
+            </h2>
+        </div>
+
+
+        <form class="tipo_documento" role="form" action="" method="post" enctype="multipart/form-data" id="form_id"
+            style="border-top: 2px solid #691C32; max-width: 1400px; overflow-x: auto;" name="credito_fiscal_form">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6">
+                    
+                </div>
+                {% if folio %}  
+                
+                <div class="col-12 col-sm-6 col-md-6 text-end" style="margin-bottom: 30px;">
+                    <a class="btn btn-danger" role="button" href="{% url 'excedente_franquicia:search_declaracion' %}"
+                        style="background-color: #691C32; border-radius: 20px; border: none;">
+                        <i class="fa fa-plus"></i> Folio de Declaración de Aduana
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <h4>Datos de identificación</h4>
+            {% csrf_token %}
+            <!-- Start: datos identificación -->
+            <hr>
+            <div class="row align-items-end">
+
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{mercancia_form.tipo_cambio |as_crispy_field}}</strong>
+                </div>
+
+                <hr>
+
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{identificacion_form.nombre_jefe_familia |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{identificacion_form.apellido_jefe_familia |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{identificacion_form.segundo_apellido_jefe_familia |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{identificacion_form.numero_pasajeros_mayores |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{identificacion_form.numero_pasajeros_menores |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{form.medio_transporte |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{form.fecha_fin |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{form.punto_revision |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{form.aduana_ingreso |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-numero-vuelo">
+                    <strong>{{form.numero_vuelo |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-nombre-embarcacion">
+                    <strong>{{form.nombre_embarcacion |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-numero-transporte">
+                    <strong>{{form.numero_transporte |as_crispy_field}}</strong>
+                </div>
+
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-procedencia">
+                    <strong>{{form.procedencia |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-nacionalidad">
+                    <strong>{{form.nacionalidad |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-residente">
+                    <strong>
+                        <div>
+                            <input type="checkbox" name="residente" id="residente-id" class="checkboxinput form-check-input" disabled>
+                            <label for="residente-id">¿Eres residente de la frontera?
+                            </label>
+                        </div>
+                    </strong>
+                </div>
+
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12" style="height: 86px;">
+                    <strong>{{form.equipo_computo |as_crispy_field}}</strong>
+                </div>
+            </div>
+            <!-- End: datos de identificación -->
+
+            <!-- Start: mercancía -->
+            <h4>Mercancía</h4>
+            <hr>
+            <div class="row align-items-end" id="div-mercancia">
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <strong>{{mercancia_form.categoria |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-subcategoria">
+                    <strong>{{mercancia_form.subcategoria |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-producto">
+                    <strong>{{mercancia_form.producto |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-graduacion">
+                    <strong>{{mercancia_form.graduacion |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-pais">
+                    <strong>{{mercancia_form.pais_origen |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-precio">
+                    <strong>{{mercancia_form.precio |as_crispy_field}}</strong>
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12 d-none" id="div-unidades-excedentes">
+                    <strong>{{mercancia_form.unidades_excedentes |as_crispy_field}}</strong>
+                </div>
+
+                <!-- Botón de para agregar el producto a la tabla -->
+                <div class="form-group col-12 d-none" id="div-btn-agregar">
+                    <button id="agregar-producto-btn" class="btn btn-primary"
+                        style="background-color: #691C32; border: none;" type="button" role="button">Agregar
+                        producto</button>
+                </div>
+
+            </div>
+            <!-- End: Mercancía -->
+
+            <!-- Start: tabla productos -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="table-responsive shadow" style="border-radius: 20px 20px 0 0;border-style: none;">
+                        <table id="ipi-table" class="table table-striped table-borderless table tablesorter mb-0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center">
+                                        <p id="">Producto</p>
+                                    </th>
+                                    <!-- <th class="text-center">
+                                        <p id="">Cantidad</p>
+                                    </th> -->
+                                    <th class="text-center">
+                                        <p id="">Costo unitario</p>
+                                    </th>
+                                    <th class="text-center">
+                                        <p id="">Valor USD</p>
+                                    </th>
+                                    <th class="text-center">
+                                        <p id="">%Tasa</p>
+                                    </th>
+                                    <th class="text-center">
+                                        <p id="">Unidades excedentes</p>
+                                    </th>
+                                    <th class="text-center filter-false sorter-false">
+                                        <p id="">Acciones</p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center" id="table-body">
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End: tabla productos -->
+
+            <hr style="margin-top: 30px;margin-bottom: 10px;">
+
+            <div class="form-group my-3">
+                <button class="btn d-block w-100" type="submit" style="border-radius:20px; background-color: #691C32; color: white;">
+                    <i class="fas fa-save"></i>
+                    &nbsp;Confirmar la mercancía
+                </button>
+
+                <a class="btn d-block w-100" role="button" href="{{ lineas_externo }}" style="border-radius:20px; margin-top: 15px; background-color: #235b23; color: white;">
+                    <i class="fas fa-arrow-left"></i> &nbsp;Cancelar
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+</section>
+<!-- End of content Section -->
+
+<!-- Start: template -->
+<template id="producto-row-template">
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+            <button class="btn btnMaterial btn-flat success semicircle" role="button" type="button" title="Eliminar"
+                onclick="deleteProducto(this)">
+                <i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i>
+            </button>
+        </td>
+    </tr>
+</template>
+<!-- End: template -->
+
+{% endblock content %}
+
+{% block js %}
+
+
+<!-- Sweet alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    let pk = "";
+
+    function showLoading () {
+        Swal.fire({
+            title: '¡Espere un momento!',
+            html: 'Generando acuse..',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        });
+    }
+    
+    function hideLoading(){
+        Swal.close();
+    }
+
+    function showAlert(text, icon, tittle, type, error) {
+        let config = (!error)? {
+            showCancelButton: true,
+            title: tittle,
+            text: text,
+            type: type,
+            icon: icon,
+            confirmButtonText: "Mostrar acuse",
+            cancelButtonText: 'Volver',
+            cancelButtonColor: "#235b23",
+            confirmButtonColor: "#691C32",
+        }:{
+            showCancelButton: true,
+            showConfirmButton: false,
+            title: tittle,
+            text: text,
+            type: type,
+            icon: icon,
+            cancelButtonText: 'Volver',
+            cancelButtonColor: "#235b23",
+        }
+        Swal.fire(config).then((result) => {
+            
+            if (result.isConfirmed) {
+                window.location.href = `/excedente_franquicia/acuse/${pk}`
+            } else if (result.isDenied) {
+                return false;
+            }
+        });
+    }
+
+    const valorDolar = {{mercancia_form.tipo_cambio.value}};
+
+</script>
+
+<script>
+    let nombreEmbarcacion = "{{form.numero_vuelo.value}}"
+    let numeroVuelo = "{{form.nombre_embarcacion.value}}"
+    let medioTransporteValue = "{{form.medio_transporte.value}}"
+
+    if(nombreEmbarcacion != "" && medioTransporteValue == "3"){
+        document.getElementById("div-nombre-embarcacion").classList.remove("d-none");
+    }
+    if(numeroVuelo != "" && medioTransporteValue == "4"){
+        document.getElementById("div-numero-vuelo").classList.remove("d-none");
+    }
+</script>
+<script>
+    const residenteCheck = document.getElementById("residente-id");
+
+    
+</script>
+
+<!-- Custon JS -->
+<script src="{% static 'assets/js/excedente_franquicia/services.js' %}"></script>
+<script src="{% static 'assets/js/excedente_franquicia/utils.js' %}"></script>
+<script src="{% static 'assets/js/excedente_franquicia/costoCantidad.js' %}"></script>
+
+<script src="{% static 'assets/js/excedente_franquicia/fillSelects.js' %}"></script>
+
+
+<script src="{% static 'assets/js/excedente_franquicia/fillTable.js' %}"></script>
+<script src="{% static 'assets/js/excedente_franquicia/post.js' %}"></script>
+
+<script>
+    //selects de medio de transporte, punto de revisión y aduana.
+    let medio_trans = document.getElementById('id_medio_transporte');
+    let punto_rev = document.getElementById('id_punto_revision');
+    let aduana_ingr = document.getElementById('id_aduana_ingreso');
+    let errors = document.getElementsByClassName('invalid-feedback');
+
+    medio_trans.addEventListener("input",  (event) =>{
+        
+    });
+
+    medio_trans.addEventListener('input', function(){
+        if(medio_trans.value == 0){
+            while (punto_rev.length > 0) {
+                punto_rev.remove(0);
+            }
+            while (aduana_ingr.length > 0) {
+                aduana_ingr.remove(0);
+            }
+            let opt = document.createElement('option');
+            opt.text = "---------"
+            opt.disabled = true
+            opt.selected = true
+            let opt2 = document.createElement('option');
+            opt2.text = "---------"
+            opt2.disabled = true
+            opt2.selected = true
+
+            aduana_ingr.add(opt2, aduana_ingr[0])
+            punto_rev.add(opt, punto_rev[0])
+        }
+        insert_puntos_revision();
+
+        //si es residente activa el checkbox
+        if(medio_trans.value == 2){
+            residenteCheck.disabled = false;
+            // residenteCheck.checked = false;
+        }
+        else{
+            residenteCheck.disabled = true;
+            residenteCheck.checked = false;
+        }
+
+    });
+
+    punto_rev.addEventListener('input', function(){
+        insert_aduana_ingreso();
+    });
+
+    function insert_puntos_revision(){
+        fetch(`${window.location.origin}/excedente_franquicia/api/${medio_trans.value}`).then(response => response.json()).then(function (data) {
+            //Limpia el select de puntos de revisiones y aduana de ingreso
+            while (punto_rev.length > 0) {
+                punto_rev.remove(0);
+            }
+            while (aduana_ingr.length > 0) {
+                aduana_ingr.remove(0);
+                
+            }
+            for (let i = 0; i < data.length; i++) {
+                var option = document.createElement('option',data[i].id);
+                option.text = data[i].nombre_punto_revision;
+                option.value = data[i].id;
+                punto_rev.add(option, punto_rev[0]);
+            }
+            let opt = document.createElement('option');
+            opt.text = "---------"
+            opt.disabled = true
+            opt.selected = true
+            
+            let opt2 = document.createElement('option');
+            opt2.text = "---------"
+            opt2.disabled = true
+            opt2.selected = true
+
+            aduana_ingr.add(opt2, aduana_ingr[0])
+            punto_rev.add(opt, punto_rev[0])
+            insert_aduana_ingreso()
+        });
+    }
+
+    function insert_on_error_revision(){
+        fetch(`${window.location.origin}/excedente_franquicia/api/${medio_trans.value}`).then(response => response.json()).then(function (data) {
+            for (let i = 0; i < data.length; i++) {
+                var option = document.createElement('option',data[i].id);
+                option.text = data[i].nombre_punto_revision;
+                option.value = data[i].id;
+                punto_rev.add(option, punto_rev[2]);
+            }
+        });
+    }
+
+    function insert_aduana_ingreso(){
+        fetch(`${window.location.origin}/excedente_franquicia/api/${medio_trans.value}/${punto_rev.value}`).then(response => response.json()).then(function (data) {
+            //Limpia el select de aduana de ingreso
+            while (aduana_ingr.length > 0) {
+                aduana_ingr.remove(0);
+            }
+
+            var option = document.createElement('option',data.id);
+            option.text = data.nombre_aduana;
+            option.value = data.id;
+            option.selected = true;
+            aduana_ingr.add(option, aduana_ingr[0]);
+        });
+    }
+
+    function insert_aduana_on_error_ingreso(){
+        fetch(`${window.location.origin}/excedente_franquicia/api/${medio_trans.value}/${punto_rev.value}`).then(response => response.json()).then(function (data) {
+            var option = document.createElement('option',data.id);
+            option.text = data.nombre_aduana;
+            option.value = data.id;
+            aduana_ingr.add(option, aduana_ingr[0]);
+        });
+    }
+
+    if(errors.length > 0){//Hay errores
+        for (let i = 0; i < punto_rev.options.length; i++) {
+            if(punto_rev.options[i].innerHTML != '---------'){
+                if(punto_rev.options[i].selected == false){
+                    punto_rev.remove(i);
+                    i--;
+                }
+            }
+        }
+
+        for (let i = 0; i < aduana_ingr.options.length; i++) {
+            if(aduana_ingr.options[i].innerHTML != '---------'){
+                if(aduana_ingr.options[i].selected == false){
+                    aduana_ingr.remove(i);
+                    i--;
+                }
+            }
+        }
+
+        insert_on_error_revision();
+    }else{
+        if(!medio_trans.value){
+            while (punto_rev.length > 1) {
+                punto_rev.remove(1);
+            }
+            while (aduana_ingr.length > 1) {
+                aduana_ingr.remove(1);
+            }
+        }
+    }
+
+</script>
+
+<script>
+
+</script>
+
+{% endblock %}

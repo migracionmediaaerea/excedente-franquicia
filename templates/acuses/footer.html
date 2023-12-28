@@ -1,0 +1,62 @@
+{% load custom_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,800" rel="stylesheet">
+    <link rel="stylesheet" href="{{static}}/assets/pdfbootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{static}}/assets/css/acuses.css">
+
+<script>
+        function substitutePdfVariables() {
+
+            function getParameterByName(name) {
+                var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+                return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+            }
+
+            function substitute(name) {
+                var value = getParameterByName(name);
+                var elements = document.getElementsByClassName(name);
+
+                for (var i = 0; elements && i < elements.length; i++) {
+                    elements[i].textContent = value;
+                }
+            }
+
+            ['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection']
+                .forEach(function(param) {
+                    substitute(param);
+                });
+        }
+    </script>
+</head>
+<body onload="substitutePdfVariables()">
+    <footer class="sticky-footer" style="bottom: 0;">
+        <div class="container my-auto">
+            <div class="row" style="position: relative; display: flex;">
+
+                <div class="col-12" style="position: absolute; bottom: 45px;margin-left: auto;margin-right: auto;left: 0;right: 0;text-align: center;">
+                    <p style="line-height: 9px;font-size: .75em;color: #b8981f;font-weight: bold;">
+                        Página <span class="page"></span> de <span class="topage"></span>
+                    </p>
+                </div>
+
+                <div class="col-12" style="position: absolute; bottom: 25px;">
+                    <p style="line-height: 9px;font-size: .75em;color: #b8981f;font-weight: bold;">
+                        {{footer_text}}
+                        {% comment %} Paseo de la Reforma No. 10, Col. Tabacalera, CP. 06030, Alcaldía Cuauhtémoc, Ciudad de México {% endcomment %}
+                    </p>
+                </div>
+    
+                <div class="col-12 d-xl-flex justify-content-xl-end align-items-xl-center">
+                    <img class="img-fluid" src="{{footer}}">
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

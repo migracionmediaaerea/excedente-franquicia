@@ -1,0 +1,55 @@
+version: "3.3"
+
+x-django-base: &django-base
+  build: .
+  env_file:
+    - .env
+  extra_hosts:
+    - "db:${EXTERNAL_DB_HOST}"
+  volumes:
+    - .:/app
+    - anammodelos:/app/comun
+    - mediacompartida:/app/media
+    - lineascomun:/app/lineascomun
+    - ${SSL_CERTIFICATE_PATH}:/ssl
+  logging:
+    options:
+      max-size: "100m"
+
+services:
+  django:
+    <<: *django-base
+    command: sh docker/django/start-dev.sh
+    ports:
+      - ${PORT_OUT}:8000
+
+  # cluster:
+  #   <<: *django-base
+  #   command: sh docker/django/start-dev-cluster.sh
+  #   depends_on:
+  #     - django
+  #     - redis
+
+  # redis:
+  #   image: "redis:5.0.3-alpine"
+
+  # promtail:
+  #   image: grafana/promtail:2.6.1
+  #   command: -config.file=/etc/promtail/config.yml
+  #   env_file:
+  #     - .env
+  #   extra_hosts:
+  #     - "loki:${LOKI_HOST}"
+  #   volumes:
+  #     - ./docker/promtail/:/etc/promtail/
+  #     - ./logs:/app/logs/
+  #   depends_on:
+  #     - django
+
+volumes:
+  anammodelos:
+    external: true
+  mediacompartida:
+    external: true
+  lineascomun:
+    external: true

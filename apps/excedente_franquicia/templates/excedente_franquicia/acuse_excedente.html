@@ -1,0 +1,388 @@
+{% block content %}
+{% load static %}
+{% load custom_math %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="{{static}}/assets/css/acuse.css">
+    <title>Acuse</title>
+
+    <style>
+        input[type="radio"]:disabled {
+            -webkit-appearance: none;
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            padding: 0px;
+            background-clip: content-box;
+            border: 2px solid #bbbbbb;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        input[type="radio"]:checked {
+            background-color: black;
+        }
+
+        .box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .box-left > span { margin-right: auto; }
+        .box-right > span { margin-left: auto;  }
+
+        /* non-essential */
+        .box {
+            align-items: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="title__container">
+                <h1 class="text-center">BIENVENIDO A MÉXICO</h1>
+                <h4 class="text-center">EXCEDENTE DE FRANQUICIA</h4>
+            </div>
+        </div>
+            
+        <div class="row">
+
+            <div class="col">
+                <!--Seccion 1-->
+                <div class="section__1">
+                    <div class="section__header">
+                        <div class="section__number">
+                            <p class="text-center">
+                                1
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="display: -webkit-box;-webkit-box-pack: justify;">
+                        <div class="col-4">
+                            <label for="apellidos">Apellidos</label>
+                        </div>
+                        <div class="col-8">
+                            <input id="apellidos" type="text"
+                                value="{{viaje.apellido_jefe_fa}} {{viaje.seg_apellido_jefe|default:""}}">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3" style="display: -webkit-box;-webkit-box-pack: justify;">
+                        <div class="col-4">
+                            <label>Nombres</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" value="{{viaje.nombre_jefe_fa}}">
+                        </div>
+                    </div>
+                    <div class="row mt-3" style="display: -webkit-box;-webkit-box-pack: justify;">
+                        <div class="col-6">
+                            <label for="num_familiares">Número de familiares que viajan con usted</label>
+                        </div>
+                        <div class="col-6">
+                            <input id="num_familiares" type="text" value="{{pasajeros}}">
+                        </div>
+                    </div>
+                </div>
+                {% comment %}
+                    
+                <div class="">
+                    <div class="section__header">
+                        <div class="section__number">
+                            <p class="text-center">
+                                2
+                            </p>
+                        </div>
+                    </div>
+                
+                    <h4>VISITANTES</h4>
+                    <div class="row input__margin">
+                        <div class="col-6">
+                            <p>Número de días que permanecerá en México</p>
+                        </div>
+                        <div class="col-6">
+                            <!-- Visitante -->
+                            <input id="dias_mexico" type="text" value="">
+                        </div>
+                    </div>
+                    <h4>RESIDENTES EN MÉXICO</h4>
+                    <div class="row input__margin">
+                        <div class="col-6">
+                            <p>Número de días que permanecerá en el extranjero</p>
+                        </div>
+                        <div class="col-6">
+                            <!-- Resiednte (false) -->
+                            <input id="dias_extranjero" type="text" value="">
+                        </div>
+                    </div>
+                    
+                </div>
+                {% endcomment %}
+                <!--Seccion 2-->
+
+                <!--Seccion 3-->
+                {% comment %}  
+                <div>
+                    <div class="section__header">
+                        <div class="section__number">
+                            <p class="text-center">
+                                3
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row input__margin">
+                        <div class="col-6">
+                            <label for="num_familiares">Número de familiares que viajan con usted</label>
+                        </div>
+                        <div class="col-6">
+                            <input id="num_familiares" type="text" value="">
+                        </div>
+                    
+
+                    </div>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                {% endcomment %}
+
+                <!--Seccion 4-->
+                <div class="mt-3">
+                    <div class="section__header">
+                        <div class="section__number">
+                            <p class="text-center">
+                                2
+                            </p>
+                        </div>
+                    </div>
+                    <h4>MEDIO DE ARRIBO</h4>
+                    
+                    <div class="row blackinput" style="display: -webkit-box;-webkit-box-pack: justify;">
+                        <div class="col-2">
+                            <label>Marítimo <input id="maritimo" type="radio" name="transporte" {% if viaje.medio_transporte.pk == 3 %}checked{% endif %} ></label>
+
+
+                        </div>
+                        <div class="col-2">
+                            <label>Aéreo <input id="aereo" type="radio" name="transporte" {% if viaje.medio_transporte.pk == 4 %}checked{% endif %}  ></label>
+
+                            
+
+                        </div>
+                        <div class="col-2">
+                            <label>Terrestre <input id="terrestre" type="radio" name="transporte" {% if viaje.medio_transporte.pk == 2 %}checked{% endif %} ></label>
+                        
+
+                        </div>
+                        <div class="col-6">
+                            <label>Terrestre residente de la frontera<input id="terrestre" type="radio" name="transporte" {% if viaje.medio_transporte.pk == 1 %}checked{% endif %}  ></label>
+                            
+
+                        </div>
+                    </div>
+                    <div class="row blackinput mb-3 mt-4" style="display: -webkit-box;-webkit-box-pack: justify;">
+                        <div class="col-3">
+                            <div>
+                                {% if viaje.fecha_fin %}
+                                <label for="numero_vuelo">Fecha de arribo</label>
+                                <div style="width: 80%;">
+                                    <p style="border: 1px solid #d6a400; padding: 2px;">
+                                        {{viaje.fecha_fin}}
+                                    </p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                {% if viaje.punto_revision %}
+                                <label for="numero_vuelo">Punto de revisión</label>
+                                <div style="width: 80%;">
+                                    <p style="border: 1px solid #d6a400; padding: 2px;">
+                                        {{viaje.punto_revision}}
+                                    </p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                {% if viaje.aduana_ingreso %}
+                                <label for="numero_vuelo">Aduana de ingreso</label>
+                                <div style="width: 80%;">
+                                    <p style="border: 1px solid #d6a400; padding: 2px;">
+                                        {{viaje.aduana_ingreso}}
+                                    </p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div>
+                                {% if viaje.numero_vuelo %}
+                                <label for="numero_vuelo">Número de vuelo</label>
+                                <div style="width: 80%;">
+                                    <p style="border: 1px solid #d6a400; padding: 2px;">
+                                        {{viaje.numero_vuelo}}
+                                    </p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="section__header">
+                        <div class="section__number">
+                            <p class="text-center">
+                                3
+                            </p>
+                        </div>
+                    </div>
+
+                    <h4>MERCANCÍAS</h4>
+
+                    <table class="table mt-3">
+
+                        <div class="col-3">
+                            <div>
+                                <div style="width: 80%;">
+                                    <label for="numero_vuelo">Tipo de cambio:</label>
+                                    <p style="border: 1px solid #d6a400; padding: 2px;">
+                                        {{tipo_cambio}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Total producto</th>
+                                <th scope="col">Tasa</th>
+                                <th scope="col">Total impuesto</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for mercancia in mercancias %}
+                            <tr>
+                                <td  class="text-center">{{mercancia.producto.nombre_producto}}</td>
+                                {% if mercancia.precio %}
+                                    <td class="text-center">${{mercancia.precio}}usd</td>
+                                {% else %}
+                                    <td class="text-center">N/A</td>
+                                {% endif %}
+                                <td class="text-center">{{mercancia.cantidad}}</td>
+                                <td class="text-center">{{ mercancia.precio | suma:mercancia.cantidad }}</td>
+                                {% if mercancia.producto.tasa_impuesto %}
+                                    <td class="text-center">{{mercancia.producto.tasa_impuesto}}%</td>
+                                {% else %}
+                                    <td class="text-center">N/A</td>
+                                {% endif %}
+                                <td class="text-center">{{mercancia.precio | impuesto:mercancia.producto.tasa_impuesto | multiplica:mercancia.cantidad}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                        <tfoot> 
+                            <tr>
+                                <td colspan="5" class="text-center">Cantidad a pagar</td>
+                                <td class="text-center">
+                                    {{excedente|redondeo}}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    
+                </div>
+            </div>            
+        </div>
+
+        <div class="row" style="margin-top: 2em;display: -webkit-box;">       
+            <div class="col-12 text-center">
+                <center><p>Folio: {{viaje.folio}}</p></center>
+                <div>
+                    {{qr|safe}}
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <p style=" font-size:1rem;">Validación agencia:</p>
+            <p style="overflow-wrap: break-word; word-break: break-all; font-size:0.8rem;">
+                {{firma|default:""}}
+            </p>
+        </div>
+
+        {% comment %}
+        <div style="display: inline-block; width: 100%">
+            <div id="info_container" class="row saltar" style="font-size: 13px; border-top: #dcdcdc solid 1px; padding-top: 10px">
+                <div class="col-2" style="padding-top: 3px">
+                    <div class="blue_bg" style="height: 1rem"></div>
+                </div>
+                <div class="col-10">
+                    <p>La mercancía señalada no requiere pago de impuestos al comercio exterior.</p>
+                </div>
+            
+            </div>
+
+            <div class="row fix-row saltar">
+                <div class="col-2" style="padding-top: 3px">
+                    <div class="yellow_bg" style="height: 1rem"></div>
+                </div>
+
+                <div class="col-10">
+                    <p>El valor de la mercancía se encuentra dentro de tu franquicia de $<span id="cantidad_franquicia"></span> USD. Por lo que no será necesario el pago de contribuciones.</p>
+                </div>
+            </div>
+
+            <div class="row fix-row saltar">
+                <div class="col-2" style="padding-top: 3px">
+                    <div class="orange_bg" style="height: 1rem"></div>
+                </div>
+
+                <div class="col-10">
+                    <p>Esta mercancía no puede ser parte de tu franquicia por lo que debes hacer pago de contribuciones.</p>
+                </div>
+            </div>
+
+            <div class="row fix-row saltar">
+                <div class="col-2" style="padding-top: 3px">
+                    <div class="red_bg" style="height: 1rem"></div>
+                </div>
+
+                <div class="col-10">
+                    <p>La importación de esta mercancía deberá efectuarse por conducto de agente o Aporedado Aduanal, cumpliendo con las formalidades, necesarias para la importación de la mercancía según la normatividad vigente; lo anterior en términos del Artículo 88 segundo párrafo de la ley aduanera.</p>
+                </div>
+            </div>
+        </div>
+        <!--End: Colors information-->
+        {% endcomment %}
+    </div>
+
+    <script>
+        document.querySelectorAll("input").forEach(e => {
+            e.setAttribute("disabled", "disabled")
+        })
+
+    </script>
+
+</body>
+
+</html>
+
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block title %}
+    Página de error
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+
+    <div id="content">
+
+        <!-- End: 1 Row 1 Column -->
+        
+        <div class="d-flex justify-content-center" style = "margin-top: 80px">
+
+            <div class="card shadow search_tamaño" style = "margin:2vh; min-width: 50%;">
+
+                <div class="card-header py-3" style="background-color:#691C32;">
+                    <p class="text-light m-0 fw-bold">No tienes permisos para ver el subsistema excedente de franquicia</p>
+                </div>
+
+                <div class="card-body">
+                    <div class="row text-center text-sm-center text-md-center">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="p">
+                                <p>No tiene permiso para consultar notificaciones en excedente de franquicia <br>
+                                Si crees que esto es un error, contacta al administrador del sistema.</p>
+                                </p>
+                            </div>
+
+                            <div class="text-center">
+                                <a href="{% url 'logout' %}" class="btn" style="background-color:#691C32;color:white;">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+{% endblock %}
+
+{% block js %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                let title = "";
+                if("{{message.tags}}" === 'error'){
+                    title = "¡Error!";
+                }
+                if ('{{message.tags}}' === 'success'){
+                    title = "Éxito!";
+                }
+                if ("{{message.tags}}" === 'warning'){
+                    title = "¡Advertencia!";
+                }
+                if ("{{message.tags}}" === 'info'){
+                    title = "Información";
+                }
+
+                Swal.fire({
+                    title: title,
+                    text: '{{message}}',
+                    type: '{{message.tags}}',
+                    icon: '{{message.tags}}',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#691C32',
+                });
+
+            </script>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

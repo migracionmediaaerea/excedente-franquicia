@@ -1,0 +1,51 @@
+<!-- <!DOCTYPE html> Rarwww soy el Trejo y me gusta la verga -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formset JS</title>
+    <style>
+      body {
+        background-color: #1e1e1e;
+        color: white;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <form id="form_id">
+      <button type="button" data-template="test_formset_template">+ Agregar Chompy</button>
+      <div id="test_formset_container"></div>
+
+      <br>
+
+      <button type="button" data-template="test_formset_template_2">+ Agregar Chompy2</button>
+      <div id="test_formset_container_2"></div>
+    </form>
+    
+    <template id="test_formset_template" data-container_target="test_formset_container">
+      <div id="id_formset-div-0" name="formset-div-0">
+        <button type="button" class="delete-formset">Delete</button>
+        <input type="text" value="Objeto" name="objeto-0" id="id_objeto-0"/>
+        <input type="number" value="1" name="number-0" id="id_number-0">
+        <textarea name="textarea-0" id="id_textarea-0"></textarea>
+        <select name="select-0" id="id_select-0">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <input type="text" hidden="true" id="id_hidden-0" name="hidden-0"/>
+      </div>
+    </template>
+
+    <template id="test_formset_template_2" data-container_target="test_formset_container_2">
+      <div id="id_formset2-div-0" name="formset2-div-0">
+        <button type="button" class="delete-formset">Delete</button>
+        <textarea name="textarea-0" id="id_textarea2-0"></textarea>
+      </div>
+    </template>
+
+    <script type="module" src="formsets.js"></script>
+  </body>
+</html>

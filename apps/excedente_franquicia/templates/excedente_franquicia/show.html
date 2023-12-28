@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block css %}
+
+{% endblock css %}
+{% block title %}Datos del crédito fiscal {%endblock %}
+{% block content %}
+
+
+<section class="tipo_documento clean-block clean-form" style="overflow-x: auto; ">
+    <div class="container-fluid px-0">
+        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <div class="col-md-12" style="margin-bottom: 25px;padding-left: 5%;font-size: 21px;margin-top: 26px;">
+                <a class="anone" href="{% url 'excedente_franquicia:index' %}">
+                    <i class="fa fa-long-arrow-left" style="color: #6F7271"></i>
+                    <span style="color: #6F7271">&nbsp; Volver</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="block-heading" style="padding-top: 0px;">
+            <h2 class="text_color" style="font-size: 2.2rem; font-weight: 900;">
+                Excedente de franquicia
+                <br>
+            </h2>
+        </div>
+
+        <form class="tipo_documento" role="form" action="" method="post" enctype="multipart/form-data"
+            id="credito_fiscal_form" style="border-top: 2px solid #691C32; max-width: 1400px; overflow-x: auto;">
+            {% csrf_token %}
+            <!-- Start: Datos generales -->
+            <h4 class="mb-3">Datos de identificación</h4>
+            <hr>
+            <div class="first_container mb-3">
+                
+                <h4>Viaje con el id: {{viaje.id}}</h4>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <label class="form-label fw-bold"></label>
+                    
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <label class="form-label fw-bold"></label>
+                    
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <label class="form-label fw-bold"></label>
+                    
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <label class="form-label fw-bold"></label>
+                    
+                </div>
+                <div class="form-group col-12 col-lg-4 col-md-6 col-xl-4 col-sm-12">
+                    <label class="form-label fw-bold"></label>
+                </div>
+                
+            </div>
+            <!-- End: Datos generales -->
+
+            
+
+        </form>
+</section>
+
+{% endblock content %}

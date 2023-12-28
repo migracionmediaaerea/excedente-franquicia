@@ -1,0 +1,8 @@
+[submodule "comun"]
+	path = comun
+	url = https://github.com/mediaerea/anam-modelos
+	branch = lineas/main
+[submodule "lineascomun"]
+	path = lineascomun
+	url = https://github.com/mediaerea/lineas-de-captura-comun.git
+	branch = main
